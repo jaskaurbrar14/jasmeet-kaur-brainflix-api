@@ -39,7 +39,7 @@ router.post("/", (req, res) => {
     id: uuidv4(),
     title: videoObj.title,
     channel: "Scotty Cranmer",
-    image: "http://localhost:8082/videos/images/image9.jpeg",
+    image: videoObj.image,
     description: videoObj.description,
     views: "3,092,284",
     likes: "75,985",
