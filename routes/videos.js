@@ -14,14 +14,23 @@ const fetchVideos = () => {
 
 router.get("/", (req, res) => {
   const videosData = fetchVideos();
-  res.status(200).json(videosData);
+  videoData = videosData.map((video) => {
+    return {
+      id: video.id,
+      title: video.title,
+      channel: video.channel,
+      image: video.image,
+    };
+  });
+  res.status(200).json(videoData);
 });
 
 router.get("/:videoid", (req, res) => {
   const videosData = fetchVideos();
   videoId = req.params.videoid;
   filteredVideo = videosData.filter((video) => video.id === videoId);
-  res.status(200).json(filteredVideo);
+  const [objFilterVideo] = filteredVideo;
+  res.status(200).json(objFilterVideo);
 });
 
 router.post("/", (req, res) => {
@@ -29,7 +38,15 @@ router.post("/", (req, res) => {
   const newVideo = {
     id: uuidv4(),
     title: videoObj.title,
+    channel: "Scotty Cranmer",
+    // image: ,
     description: videoObj.description,
+    views: "3,092,284",
+    likes: "75,985",
+    duration: "4:20",
+    video: "https://project-2-api.herokuapp.com/stream",
+    timestamp: Date.now(),
+    comments: [],
   };
 
   const videosData = fetchVideos();
